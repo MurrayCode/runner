@@ -4,11 +4,11 @@ use clap::{Args, Parser, Subcommand};
 #[clap(author, about, version)]
 pub struct RunnerArgs {
     #[clap(subcommand)]
-    entity: EntityType,
+    pub entity: EntityType,
 }
 
 #[derive(Subcommand, Debug)]
-enum EntityType {
+pub enum EntityType {
     /// Manages different types of runs
     Run(RunCommand),
     /// Manages users
@@ -18,129 +18,138 @@ enum EntityType {
 }
 
 #[derive(Debug, Args)]
-struct RunCommand {
+pub struct RunCommand {
     #[clap(subcommand)]
-    subcmd: RunSubCommand,
+    pub subcmd: RunSubCommand,
 }
 
 #[derive(Debug, Subcommand)]
-enum RunSubCommand {
+pub enum RunSubCommand {
     /// Creates a new run
     Create(CreateRun),
+    /// Updates a run
+    Update(UpdateRun),
     /// Lists all runs
-    List(ListRun),
+    List(ListRuns),
     /// Shows details of a run
-    Show(ShowRun),
+    Show(ShowEntity),
     /// Deletes a run
-    Delete(DeleteRun),
+    Delete(DeleteEntity),
 }
 
 #[derive(Debug, Args)]
-struct CreateRun {
+pub struct CreateRun {
     /// The distance in meters
-    distance: f64,
+    pub distance: f64,
     /// The duration in seconds
-    duration: i32,
+    pub duration: i32,
 }
 
 #[derive(Debug, Args)]
-struct ListRun {
+pub struct UpdateRun {
+    /// The id of the run to update
+    pub id: i32,
+    /// The new distance in meters
+    pub distance: f64,
+    /// The new duration in seconds
+    pub duration: i32,
+}
+
+#[derive(Debug, Args)]
+pub struct ListRuns {
     /// The user id
-    user_id: Option<i32>,
+    pub user_id: i32,
 }
 
 #[derive(Debug, Args)]
-struct ShowRun {
-    /// The run id
-    id: i32,
-}
-
-#[derive(Debug, Args)]
-struct DeleteRun {
-    /// The run id
-    id: i32,
-}
-
-#[derive(Debug, Args)]
-struct UserCommand {
+pub struct UserCommand {
     #[clap(subcommand)]
-    subcmd: UserSubCommand,
+    pub subcmd: UserSubCommand,
 }
 
 #[derive(Debug, Subcommand)]
-enum UserSubCommand {
+pub enum UserSubCommand {
     /// Creates a new user
     Create(CreateUser),
+    /// Updates a user
+    Update(UpdateUser),
     /// Lists all users
-    List(ListUsers),
+    List,
     /// Shows details of a user
-    Show(ShowUser),
+    Show(ShowEntity),
     /// Deletes a user
-    Delete(DeleteUser),
+    Delete(DeleteEntity),
 }
 
 #[derive(Debug, Args)]
-struct CreateUser {
+pub struct CreateUser {
     /// The user name
-    name: String,
+    pub name: String,
+    /// The users email
+    pub email: String,
 }
-
 #[derive(Debug, Args)]
-struct ListUsers {}
-
+pub struct UpdateUser {
+    /// The id of the user to update
+    pub id: i32,
+    /// The new user name
+    pub name: String,
+    /// The new email
+    pub email: String,
+}
 #[derive(Debug, Args)]
-struct ShowUser {
+pub struct ShowEntity {
     /// The user id
-    id: i32,
+    pub id: i32,
 }
 
 #[derive(Debug, Args)]
-struct DeleteUser {
+pub struct DeleteEntity {
     /// The user id
-    id: i32,
+    pub id: i32,
 }
 
 #[derive(Debug, Args)]
-struct RecordCommand {
+pub struct RecordCommand {
     #[clap(subcommand)]
-    subcmd: RecordSubCommand,
+    pub subcmd: RecordSubCommand,
 }
 #[derive(Debug, Subcommand)]
-enum RecordSubCommand {
+pub enum RecordSubCommand {
     /// Records a new run
     Create(CreateRecordedRun),
+    /// Updates a recorded run
+    Update(UpdateRecordedRun),
     /// Lists all recorded runs
     List(ListRecordedRuns),
     /// Shows details of a recorded run
-    Show(ShowRecordedRun),
+    Show(ShowEntity),
     /// Deletes a recorded run
-    Delete(DeleteRecordedRun),
+    Delete(DeleteEntity),
 }
 
 #[derive(Debug, Args)]
-struct CreateRecordedRun {
+pub struct CreateRecordedRun {
     /// The user id
-    user_id: i32,
+    pub user_id: i32,
     /// The distance in meters
-    distance: f64,
+    pub distance: f64,
     /// The duration in seconds
-    duration: i32,
+    pub duration: i32,
 }
 
 #[derive(Debug, Args)]
-struct ListRecordedRuns {
+pub struct ListRecordedRuns {
     /// The user id of the runs you want to list
-    user_id: i32,
+    pub user_id: i32,
 }
 
 #[derive(Debug, Args)]
-struct ShowRecordedRun {
-    /// The recorded run id
-    id: i32,
-}
-
-#[derive(Debug, Args)]
-struct DeleteRecordedRun {
-    /// The recorded run id
-    id: i32,
+pub struct UpdateRecordedRun {
+    /// The id of the recorded run to update
+    pub id: i32,
+    /// The new distance in meters
+    pub distance: f64,
+    /// The new duration in seconds
+    pub duration: i32,
 }
