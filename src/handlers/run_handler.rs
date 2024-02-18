@@ -32,7 +32,7 @@ pub fn handle_update_run(run: UpdateRun) {
 }
 
 pub fn handle_list_runs(run: ListRuns) {
-    println!("Listing runs")
+    println!("Listing runs for user: {:?}", run.user_id)
 }
 
 pub fn handle_show_run(run: ShowEntity) {

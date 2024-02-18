@@ -7,3 +7,5 @@ edition = "2021"
 
 [dependencies]
 clap = { version = "4.5.1", features = ["derive"] }
+diesel = { version = "2.1.4", features = ["postgres", "chrono"] }
+dotenv = "0.15.0"

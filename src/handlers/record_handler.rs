@@ -33,7 +33,7 @@ pub fn handle_update_record(record: UpdateRecordedRun) {
 }
 
 pub fn handle_list_record(record: ListRecordedRuns) {
-    println!("Listing records")
+    println!("Listing records for user: {:?}", record.user_id)
 }
 
 pub fn handle_show_record(record: ShowEntity) {
