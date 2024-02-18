@@ -1,5 +1,13 @@
+#[macro_use]
+extern crate diesel;
+extern crate dotenv;
+
 mod args;
+mod db;
 mod handlers;
+mod models;
+mod schema;
+
 use args::{EntityType, RunnerArgs};
 use clap::Parser;
 

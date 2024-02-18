@@ -1,38 +1,38 @@
-table! {
-    users (id) {
-        id -> Int4,
-        username -> Varchar,
-        email -> Varchar,
-        created_at -> Timestamp,
-        updated_at -> Timestamp,
-    }
-}
+// @generated automatically by Diesel CLI.
 
-table! {
-    runs (id) {
-        id -> Int4,
-        user_id -> Int4,
-        distance -> Int4,
-        duration -> Int4,
-        created_at -> Timestamp,
-        updated_at -> Timestamp,
-    }
-}
-
-table! {
+diesel::table! {
     records (id) {
-        id -> Int4,
-        user_id -> Int4,
-        run_id -> Int4,
-        distance -> Int4,
-        duration -> Int4,
-        created_at -> Timestamp,
-        updated_at -> Timestamp,
+        id -> Integer,
+        user_id -> Integer,
+        run_id -> Integer,
+        distance -> Integer,
+        duration -> Integer,
     }
 }
 
-joinable!(runs -> users (user_id));
-joinable!(records -> runs (run_id));
-joinable!(records -> users (user_id));
+diesel::table! {
+    runs (id) {
+        id -> Integer,
+        user_id -> Integer,
+        distance -> Integer,
+        duration -> Integer,
+    }
+}
 
-allow_tables_to_appear_in_same_query!(users, runs, records,);
+diesel::table! {
+    users (id) {
+        id -> Integer,
+        username -> Text,
+        email -> Text,
+    }
+}
+
+diesel::joinable!(records -> runs (run_id));
+diesel::joinable!(records -> users (user_id));
+diesel::joinable!(runs -> users (user_id));
+
+diesel::allow_tables_to_appear_in_same_query!(
+    records,
+    runs,
+    users,
+);
