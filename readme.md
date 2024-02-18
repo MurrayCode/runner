@@ -4,9 +4,6 @@ Weekend (17/18th Feb 2024) upskilling project to look into writing CLI's in Rust
 
 ![goals](images/goals.png)
 
-## Usage 
-
-```cargo  build && cargo install --path .```
 
 ## Base Commands
 
