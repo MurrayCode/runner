@@ -2,6 +2,7 @@ use crate::args::{CreateRun, DeleteEntity, RunCommand, RunSubCommand, ShowEntity
 use crate::db::establish_connection;
 use crate::models::{NewRun, Run as DBRun};
 use diesel::prelude::*;
+use rand::Rng;
 
 pub fn handle_run_command(run: RunCommand) {
     let command = run.subcmd;
@@ -20,6 +21,9 @@ pub fn handle_run_command(run: RunCommand) {
         }
         RunSubCommand::Delete(delete) => {
             handle_delete_run(delete);
+        }
+        RunSubCommand::Randomise => {
+            handle_randomise_run();
         }
     }
 }
@@ -80,4 +84,14 @@ pub fn handle_delete_run(run: DeleteEntity) {
     diesel::delete(runs.find(run.id))
         .execute(&mut connection)
         .expect(&format!("Unable to find run {}", run.id));
+}
+
+pub fn handle_randomise_run() {
+    use crate::schema::runs::dsl::*;
+    let mut connection = establish_connection();
+    println!("Randomising run");
+    let results = runs.load::<DBRun>(&mut connection).unwrap();
+    let mut rng = rand::thread_rng();
+    let random_run = rng.gen_range(1..results.len());
+    println!("{:?}", results[random_run]);
 }

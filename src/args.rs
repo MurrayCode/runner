@@ -35,6 +35,8 @@ pub enum RunSubCommand {
     Show(ShowEntity),
     /// Deletes a run
     Delete(DeleteEntity),
+    /// Randomises the run
+    Randomise,
 }
 
 #[derive(Debug, Args)]
