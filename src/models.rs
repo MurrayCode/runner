@@ -32,11 +32,11 @@ pub struct Run {
 
 #[derive(Insertable)]
 #[diesel(table_name = records)]
-pub struct NewRecord {
-    pub user_id: i32,
-    pub run_id: i32,
-    pub distance: i32,
-    pub duration: i32,
+pub struct NewRecord<'a> {
+    pub user_id: &'a i32,
+    pub run_id: &'a i32,
+    pub distance: &'a i32,
+    pub duration: &'a i32,
 }
 
 #[derive(Queryable, Debug, AsChangeset)]

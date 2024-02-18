@@ -126,8 +126,10 @@ pub enum RecordSubCommand {
 pub struct CreateRecordedRun {
     /// The user id
     pub user_id: i32,
+    /// The run id
+    pub run_id: i32,
     /// The distance in meters
-    pub distance: f64,
+    pub distance: i32,
     /// The duration in seconds
     pub duration: i32,
 }
@@ -143,7 +145,7 @@ pub struct UpdateRecordedRun {
     /// The id of the recorded run to update
     pub id: i32,
     /// The new distance in meters
-    pub distance: f64,
+    pub distance: i32,
     /// The new duration in seconds
     pub duration: i32,
 }
