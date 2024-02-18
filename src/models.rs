@@ -18,16 +18,14 @@ pub struct User {
 
 #[derive(Insertable)]
 #[diesel(table_name = runs)]
-pub struct NewRun {
-    pub user_id: i32,
-    pub distance: i32,
-    pub duration: i32,
+pub struct NewRun<'a> {
+    pub distance: &'a i32,
+    pub duration: &'a i32,
 }
 
-#[derive(Queryable, Debug, AsChangeset)]
+#[derive(Queryable, Debug, AsChangeset, Selectable)]
 pub struct Run {
     pub id: i32,
-    pub user_id: i32,
     pub distance: i32,
     pub duration: i32,
 }

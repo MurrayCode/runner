@@ -13,7 +13,6 @@ diesel::table! {
 diesel::table! {
     runs (id) {
         id -> Integer,
-        user_id -> Integer,
         distance -> Integer,
         duration -> Integer,
     }
@@ -29,7 +28,6 @@ diesel::table! {
 
 diesel::joinable!(records -> runs (run_id));
 diesel::joinable!(records -> users (user_id));
-diesel::joinable!(runs -> users (user_id));
 
 diesel::allow_tables_to_appear_in_same_query!(
     records,

@@ -1,8 +1,8 @@
 -- Your SQL goes here
-CREATE TABLE `users`(
+CREATE TABLE `runs`(
 	`id` INTEGER NOT NULL PRIMARY KEY,
-	`username` TEXT NOT NULL,
-	`email` TEXT NOT NULL
+	`distance` INTEGER NOT NULL,
+	`duration` INTEGER NOT NULL
 );
 
 CREATE TABLE `records`(
@@ -15,11 +15,9 @@ CREATE TABLE `records`(
 	FOREIGN KEY (`run_id`) REFERENCES `runs`(`id`)
 );
 
-CREATE TABLE `runs`(
+CREATE TABLE `users`(
 	`id` INTEGER NOT NULL PRIMARY KEY,
-	`user_id` INTEGER NOT NULL,
-	`distance` INTEGER NOT NULL,
-	`duration` INTEGER NOT NULL,
-	FOREIGN KEY (`user_id`) REFERENCES `users`(`id`)
+	`username` TEXT NOT NULL,
+	`email` TEXT NOT NULL
 );
 

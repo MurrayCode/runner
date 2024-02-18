@@ -30,7 +30,7 @@ pub enum RunSubCommand {
     /// Updates a run
     Update(UpdateRun),
     /// Lists all runs
-    List(ListRuns),
+    List,
     /// Shows details of a run
     Show(ShowEntity),
     /// Deletes a run
@@ -40,7 +40,7 @@ pub enum RunSubCommand {
 #[derive(Debug, Args)]
 pub struct CreateRun {
     /// The distance in meters
-    pub distance: f64,
+    pub distance: i32,
     /// The duration in seconds
     pub duration: i32,
 }
@@ -50,15 +50,9 @@ pub struct UpdateRun {
     /// The id of the run to update
     pub id: i32,
     /// The new distance in meters
-    pub distance: f64,
+    pub distance: i32,
     /// The new duration in seconds
     pub duration: i32,
-}
-
-#[derive(Debug, Args)]
-pub struct ListRuns {
-    /// The user id
-    pub user_id: i32,
 }
 
 #[derive(Debug, Args)]
