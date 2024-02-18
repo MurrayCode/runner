@@ -5,8 +5,6 @@ diesel::table! {
         id -> Integer,
         user_id -> Integer,
         run_id -> Integer,
-        distance -> Integer,
-        duration -> Integer,
     }
 }
 

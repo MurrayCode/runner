@@ -35,8 +35,6 @@ pub struct Run {
 pub struct NewRecord<'a> {
     pub user_id: &'a i32,
     pub run_id: &'a i32,
-    pub distance: &'a i32,
-    pub duration: &'a i32,
 }
 
 #[derive(Queryable, Debug, AsChangeset)]
@@ -44,6 +42,4 @@ pub struct Record {
     pub id: i32,
     pub user_id: i32,
     pub run_id: i32,
-    pub distance: i32,
-    pub duration: i32,
 }

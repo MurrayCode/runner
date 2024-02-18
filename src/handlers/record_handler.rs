@@ -3,7 +3,9 @@ use crate::args::{
     UpdateRecordedRun,
 };
 use crate::db::establish_connection;
+use crate::handlers::run_handler::handle_show_run;
 use crate::models::{NewRecord, Record as DBRun};
+
 use diesel::prelude::*;
 
 pub fn handle_record_command(record: RecordCommand) {
@@ -35,8 +37,6 @@ pub fn handle_create_record(record: CreateRecordedRun) {
     let new_record = NewRecord {
         user_id: &record.user_id,
         run_id: &record.run_id,
-        distance: &record.distance,
-        duration: &record.duration,
     };
 
     diesel::insert_into(records)
@@ -51,7 +51,7 @@ pub fn handle_update_record(record: UpdateRecordedRun) {
 
     println!("Updating record: {:?}", record.id);
     diesel::update(records.find(record.id))
-        .set((distance.eq(&record.distance), duration.eq(&record.duration)))
+        .set(run_id.eq(&record.run_id))
         .execute(&mut connection)
         .expect(&format!("Unable to find record {}", record.id));
 }
@@ -65,18 +65,16 @@ pub fn handle_list_record(record: ListRecordedRuns) {
         .load::<DBRun>(&mut connection)
         .unwrap();
     for record in results {
-        println!("{:?}", record);
+        handle_show_run(ShowEntity { id: record.run_id });
     }
 }
 
 pub fn handle_show_record(record: ShowEntity) {
     use crate::schema::records::dsl::*;
     let mut connection = establish_connection();
-    println!("Showing record: {:?}", record.id);
-
     let result = records.find(record.id).first::<DBRun>(&mut connection);
     match result {
-        Ok(record) => println!("{:?}", record),
+        Ok(record) => handle_show_run(ShowEntity { id: record.run_id }),
         Err(e) => println!("Error: {}", e),
     }
 }
